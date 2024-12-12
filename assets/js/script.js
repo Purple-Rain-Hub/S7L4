@@ -1,13 +1,17 @@
 let dataMountains
 const btnLoad = document.getElementById("btnLoad");
-const btnLoad2 = document.getElementById("btnLoad2")
+const btnLoad2 = document.getElementById("btnLoad2");
+const btnView = document.querySelectorAll(".btnView");
+const btnRemove = document.querySelectorAll(".btnRemove");
 const imgDoggo = document.querySelectorAll(".imgDoggo");
+const cards = document.querySelectorAll(".col-md-4");
 
 document.addEventListener("load", init())
 
 function init() {
     getApi();
     getApi2();
+    eventListener();
 }
 
 async function getApi() {
@@ -38,7 +42,7 @@ async function getApi2() {
 
 btnLoad.addEventListener("click", function (e) {
     e.preventDefault();
-    for(i=0; i<imgDoggo.length; i++){
+    for (i = 0; i < imgDoggo.length; i++) {
         imgDoggo[i].setAttribute("src", `${dataMountains[i].src.medium}`)
     }
 })
@@ -46,7 +50,15 @@ btnLoad.addEventListener("click", function (e) {
 
 btnLoad2.addEventListener("click", function (e) {
     e.preventDefault();
-    for(i=0; i<imgDoggo.length; i++){
+    for (i = 0; i < imgDoggo.length; i++) {
         imgDoggo[i].setAttribute("src", `${dataSunrise[i].src.medium}`)
     }
 })
+
+function eventListener() {
+    for (let i = 0; i < btnRemove.length; i++) {
+        btnRemove[i].addEventListener("click", function() {          
+            cards[i].style.display = "none";
+        })
+    }
+}
