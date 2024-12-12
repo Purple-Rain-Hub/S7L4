@@ -5,7 +5,9 @@ const btnView = document.querySelectorAll(".btnView");
 const btnRemove = document.querySelectorAll(".btnRemove");
 const imgDoggo = document.querySelectorAll(".imgDoggo");
 const cards = document.querySelectorAll(".col-md-4");
-const minutes = document.querySelectorAll(".text-muted")
+const minutes = document.querySelectorAll(".text-muted");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
 
 document.addEventListener("load", init())
 
@@ -72,3 +74,26 @@ function showID() {
         minutes[i].innerHTML = `${dataMountains[i].id}`;
     }
 }
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    search(input.value)
+})
+
+async function search(value) {
+    await fetch("https://api.pexels.com/v1/search?query=" + value, {
+        headers: {
+            Authorization: 'wTzX1CHG8w6AK8dYAD8cvPXV4bhucR2JXkEEQYxmh81fv7kgOx5mHpNZ'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            dataValue = data.photos;
+            for (let i = 0; i < imgDoggo.length; i++) {
+                        imgDoggo[i].setAttribute("src", `${dataValue[i].src.medium}`)
+                        minutes[i].innerHTML = `${dataValue[i].id}`;
+                    }
+        })
+        .catch(error => console.log(error))
+}
+
