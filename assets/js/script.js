@@ -5,6 +5,7 @@ const btnView = document.querySelectorAll(".btnView");
 const btnRemove = document.querySelectorAll(".btnRemove");
 const imgDoggo = document.querySelectorAll(".imgDoggo");
 const cards = document.querySelectorAll(".col-md-4");
+const minutes = document.querySelectorAll(".text-muted")
 
 document.addEventListener("load", init())
 
@@ -44,7 +45,9 @@ btnLoad.addEventListener("click", function (e) {
     e.preventDefault();
     for (i = 0; i < imgDoggo.length; i++) {
         imgDoggo[i].setAttribute("src", `${dataMountains[i].src.medium}`)
+        minutes[i].innerHTML = `${dataMountains[i].id}`;
     }
+    
 })
 
 
@@ -52,6 +55,7 @@ btnLoad2.addEventListener("click", function (e) {
     e.preventDefault();
     for (i = 0; i < imgDoggo.length; i++) {
         imgDoggo[i].setAttribute("src", `${dataSunrise[i].src.medium}`)
+        minutes[i].innerHTML = `${dataSunrise[i].id}`;
     }
 })
 
@@ -60,5 +64,11 @@ function eventListener() {
         btnRemove[i].addEventListener("click", function() {          
             cards[i].style.display = "none";
         })
+    }
+}
+
+function showID() {
+    for(let i=0; i<minutes.length; i++){
+        minutes[i].innerHTML = `${dataMountains[i].id}`;
     }
 }
